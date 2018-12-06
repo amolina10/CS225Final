@@ -29,7 +29,5 @@ public:
     int getFundsVal();
     int getPoints();
     void addCard(Card);
-    void seeCards(Card );
-    void addCard();
 };
 #endif
