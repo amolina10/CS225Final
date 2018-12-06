@@ -50,9 +50,9 @@ void Card::calcCardVal()
         case faces::eight: { value = 8; break; }
         case faces::nine: { value = 9; break; }
         case faces::ten: { value = 10; break; }
-        case faces::jack: { value = 11; break; }
-        case faces::queen: { value = 12; break; }
-        case faces::king: { value = 13; break; }
+        case faces::jack: { value = 10; break; }
+        case faces::queen: { value = 10; break; }
+        case faces::king: { value = 10; break; }
     }
 }
 
