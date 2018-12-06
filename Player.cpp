@@ -17,16 +17,12 @@ Player::Player(playerType pt, const Card c1, const Card c2)
     {
         // update the pot of the dealer
         funds = 100000;
-        //pname = "Tyrone";
-        // greet the player
-        //cout << magenta << pname << " is your dealer!" << endl;
-        //cout << "He has $" << funds << endl;
+        cout << magenta << "House has $" << funds << endl;
         // add cards to the hand
         m_hand.addCard(c1);
         m_hand.addCard(c2);
         cout << "Dealer Hand:  " << m_hand << white << endl;
         cout<< "Dealer point total" << m_hand.getTotalVal() <<endl;
-   
     }
     else
     {
@@ -55,7 +51,10 @@ int Player::getFundsVal()
     return funds;
 }
 
-void Player::decFunds(int monies) { funds -= monies; }
+void Player::decFunds(int monies) 
+{ 
+    funds -= monies; 
+}
 
 int Player::getPoints()
 {
