@@ -5,20 +5,17 @@
 
 Game::Game()
 {
-    doubleDown = false;
     Stand = false;
     playerBet = 0;
-    pot = 0;
 }
 
 void Game::playGame()
 {
- 
     bet();// get bets
     
-    if ((p1.getPoints() == 21) && (dl.getPoints() == 21))
+    if ((p1.getPoints() == 21) && (dl.getPoints() == 21)) //both get 21 on first two cards
     {
-        cout<< "tie, bet returned" << endl;
+        cout<< red << "tie, bet returned" << endl;
         // return bets to players
         p1.incFunds(playerBet);
         dl.incFunds(playerBet);
@@ -36,34 +33,38 @@ void Game::playGame()
                 p1.decFunds(playerBet);
                 cout << "New Funds:" p1.getFundsVal() << endl;
                 hit(p1, thisDeck.drawCard(), choice);
+                //print what card we pulled and new total 
             }
             else{
-                choice == 'n'; //manually go to not doubling down
+                choice == 'n'; //insufficient funds, manually go to doubling down question
                 break;
             }
         }
         
-        if(tolower(choice) == 'n'){ //no dont double down
+        if(tolower(choice) == 'n')//no dont double down
+        { 
             cout << red << "hit(h) or stay(s)? :  " << endl;
             cin >> choice;
             while (tolower(choice) == 'h') //player hits
             {
                hit(p1, thisDeck.drawCard(), choice);
+                //print what card player drew
                if(!(busted(p1)))
                {
-                    cout << red << "Enter h to hit again:  " << white;
+                    cout << red << "hit(h) again or stay(s):  " << white;
                     cin >> choice;
+                    hit(p1, thisDeck.drawCard(), choice);
+                   //print what card player drew
                }
                else //busted
                {
                    cout << cyan << "You busted" << endl;
-                   p1.decFunds(playerBet);
                    dl.incFunds(playerBet);
                    break;
                }
             }  
             cout << "dealers turn" << endl;         // dealers turn to hit or stay
-                hit(dl, thisDeck.drawCard(), choice);
+            hit(dl, thisDeck.drawCard(), choice);
         }      
 
         if (pushed())
@@ -75,6 +76,7 @@ void Game::playGame()
        if ((dl.getPoints() > p1.getPoints()) && (dl.getPoints() <21)))
         {
             cout << grey << "YOU LOST!" << white << endl;
+           dl.incFunds(playerBet);
         }
        if ((p1.getPoints() > dl.getPoints()) && (p1.getPoints() <21)))
         {
